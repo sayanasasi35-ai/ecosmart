@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoSmart Campus</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main Wrapper (controls width) */
+.wrapper {
+    width: 90%;
+    max-width: 650px;
+    margin: 50px 0;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 38px;
+    color: #4a7c59;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #6b705c;
+}
+
+/* Card Sections */
+section {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Titles */
+h2 {
+    color: #6a994e;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 14px;
+    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    font-family: 'Outfit', sans-serif;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border: 1px solid #6a994e;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    border: none;
+    background: #a7c957;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #6a994e;
+    transform: scale(1.03);
+}
+
+h3 {
+    margin-top: 15px;
+    color: #4a7c59;
+}
+
+/* Founder Section */
+.founder {
+    text-align: center;
+}
+
+.founder-card {
+    background: #f0f7f2;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.founder-card h3 {
+    margin-bottom: 10px;
+    color: #4a7c59;
+}
+
+.founder-card p {
+    margin: 6px 0;
+    color: #555;
+}
+
+.vision {
+    margin-top: 15px;
+    font-style: italic;
+    color: #6a994e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+    <h1>🌿 EcoSmart Campus</h1>
+    <p>Track Carbon • Smart Waste • Gasifier Recycling</p>
+</header>
+
+<!-- Carbon Footprint -->
+<section>
+<h2>📊 Carbon Footprint Calculator</h2>
+
+<input type="number" id="km" placeholder="Distance traveled (km)">
+<input type="number" id="electricity" placeholder="Electricity usage (hours)">
+
+<select id="food">
+<option value="2">Vegetarian</option>
+<option value="7">Non-Vegetarian</option>
+</select>
+
+<button onclick="calculateCarbon()">Calculate</button>
+
+<h3 id="carbonResult"></h3>
+</section>
+
+<!-- Smart Waste -->
+<section>
+<h2>♻ Smart Waste Segregation</h2>
+
+<select id="wasteType">
+<option value="plastic">Plastic</option>
+<option value="paper">Paper</option>
+<option value="organic">Organic</option>
+<option value="metal">Metal</option>
+</select>
+
+<button onclick="analyzeWaste()">Analyze Waste</button>
+
+<h3 id="wasteResult"></h3>
+</section>
+
+<!-- Gamified Recycling -->
+<section>
+<h2>🏆 Gamified Recycling</h2>
+
+<button onclick="addPoints()">Recycle & Earn Points</button>
+
+<h3 id="pointsDisplay">Your Eco Points: 0</h3>
+
+<p><strong>Leaderboard</strong></p>
+<p>1. Priya – 320 pts</p>
+<p>2. Rahul – 280 pts</p>
+<p>3. You – <span id="yourPoints">0</span> pts</p>
+</section>
+
+<!-- Founder Section -->
+<section class="founder">
+<h2>👤 Founder</h2>
+
+<div class="founder-card">
+<h3>sayana k</h3>
+<p><strong>College:</strong> college of engineering poonjar</p>
+<p><strong>Role:</strong>Developer & Sustainability Innovator </p>
+<p class="vision">
+"Building smart eco-solutions to create a greener campus for future generations."
+</p>
+</div>
+</section>
+
+</div>
+
+<script>
+// Carbon Calculator
+function calculateCarbon() {
+let km = document.getElementById("km").value;
+let electricity = document.getElementById("electricity").value;
+let food = document.getElementById("food").value;
+
+let carbon = (km * 0.21) + (electricity * 0.82) + parseFloat(food);
+
+let grade = "";
+
+if (carbon < 5) grade = "A - Eco Hero 🌱";
+else if (carbon < 10) grade = "B - Good 👍";
+else if (carbon < 20) grade = "C - Average ⚠";
+else grade = "D - High Impact 🚨";
+
+document.getElementById("carbonResult").innerText =
+"Your carbon footprint is " + carbon.toFixed(2) +
+" kg CO₂/day | Grade: " + grade;
+}
+
+// Smart Waste
+function analyzeWaste() {
+let waste = document.getElementById("wasteType").value;
+let message = "";
+
+if (waste === "plastic") message = "Plastic → Recyclable ♻ CO₂ Saved!";
+else if (waste === "paper") message = "Paper → Recyclable ♻ Trees Saved!";
+else if (waste === "organic") message = "Organic → Compost 🌱 Methane Reduced!";
+else if (waste === "metal") message = "Metal → Recyclable ♻ Energy Efficient!";
+
+document.getElementById("wasteResult").innerText = message;
+}
+
+// Gamification
+let points = 0;
+
+function addPoints() {
+points += 10;
+document.getElementById("pointsDisplay").innerText = "Your Eco Points: " + points;
+document.getElementById("yourPoints").innerText = points;
+}
+</script>
+
+</body>
+</html>
